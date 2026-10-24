@@ -1,4 +1,4 @@
-"""export_submission.py — ubah hasil training (runs/*) menjadi folder submission/ yang siap dinilai.
+"""export_submission.py — ubah hasil training (runs/*) menjadi folder submission/ yang siap 
 
   # 1) (opsional) lihat pengaruh resolusi uji & TTA pada my_val, TANPA menulis apa pun:
   python export_submission.py --runs runs/cnx_tiny --scan
