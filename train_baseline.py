@@ -1,22 +1,3 @@
-"""train_baseline.py — fine-tuning SATU backbone timm (versi 'maksimal' dari baseline starter kit).
-
-Dibanding baseline starter kit (ResNet-18 / EfficientNet torchvision, pilih epoch terbaik lewat akurasi):
-  1. Backbone timm pretrained ImageNet-22k (ConvNeXt) — transfer ke foto web lebih baik.
-  2. Metrik = Macro-F1 dari evaluate.metrics() (fungsi yang SAMA dengan penilai), bukan akurasi.
-  3. AMP, warmup 1 epoch + cosine per-step, LR head 10x LR backbone, tanpa weight decay di bias/norm.
-  4. Regularisasi untuk label noise: label smoothing, Mixup/CutMix (dimatikan di epoch-epoch akhir),
-     drop path, EMA bobot.
-  5. TIDAK memilih "epoch terbaik" dari validasi kecil (itu bias optimis). Yang disimpan = epoch terakhir
-     (bobot EMA); skor jujur = rata-rata Macro-F1 3 epoch terakhir.
-  6. --full: latih ulang di SEMUA data (my_val ikut) dengan jadwal yang sama untuk model final.
-
-Contoh (jalankan dari root repo):
-  python train_baseline.py --data ../train --name cnx_tiny                 # eksperimen (pakai my_val)
-  python train_baseline.py --data ../train --name cnx_tiny_full --full     # model final (semua data)
-  python export_submission.py --runs runs/cnx_tiny_full                    # -> submission/
-
-Keluaran runs/<name>/: member.pth, info.json, log.csv, args.json, val_predictions.csv
-"""
 import argparse
 import copy
 import csv
