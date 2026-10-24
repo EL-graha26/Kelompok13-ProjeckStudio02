@@ -6,9 +6,9 @@ Deep Learning (IF25-40401) · Teknik Informatika ITERA · Semester Ganjil 2026/2
 
 | No | Nama Lengkap | NIM | Kontribusi utama |
 |----|--------------|-----|------------------|
-| 1  | Najlatika    | 123140078   |                  |
-| 2  | Hanifah Hasanah | 123140082    |                  |
-| 3  | Muhammad Piela Nugraha | 123140200    |                  |
+| 1  | Najlatika    | 123140078   | Kontributor                 |
+| 2  | Hanifah Hasanah | 123140082    | Kontributor                   |
+| 3  | Muhammad Piela Nugraha | 123140200    | Kontributor                   |
 
 ## Ringkasan Pendekatan
 
@@ -21,8 +21,8 @@ Deep Learning (IF25-40401) · Teknik Informatika ITERA · Semester Ganjil 2026/2
 
 | Putaran | Commit | Macro-F1 (split validasi lokal) | Macro-F1 (diumumkan asisten) |
 |---------|--------|----------------------------------|------------------------------|
-| Preview 1 (14 Okt) | | | |
-| Preview 2 (21 Okt) | | | |
+| Preview 1 (14 Okt) | | | 0.8941 |
+| Preview 2 (21 Okt) | | | 0.8979 |
 | Final (25 Okt)     | | | |
 
 Catatan eksperimen singkat (apa yang dicoba, apa yang berhasil/gagal):
