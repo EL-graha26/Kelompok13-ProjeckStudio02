@@ -1,5 +1,5 @@
-# submission studio 2: klasifikasi sampah lima kelas
-# get_model() hanya membangun arsitektur, bobot dimuat evaluate.py dari model.pth
+# submission studio 2 · kelompok 13 (k13b - synapse)
+# get_model() = arsitektur saja, bobot dimuat evaluate.py
 # urutan kelas: 0 botol_plastik, 1 gelas_plastik, 2 kertas_kardus, 3 saset_kemasan, 4 styrofoam
 import torch
 import torch.nn as nn
@@ -22,7 +22,7 @@ class gabungan(nn.Module):
         )
 
     def forward(self, x):
-        # normalisasi dilakukan per anggota karena mean dan std bisa berbeda
+        # normalisasi per anggota (mean/std bisa beda)
         keluaran = []
         for m, mu, sd in zip(self.anggota, rata, simpangan):
             mu_t = torch.tensor(mu, dtype=x.dtype, device=x.device).view(1, 3, 1, 1)

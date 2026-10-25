@@ -3,30 +3,30 @@
   "backbone": [
     "convnext_tiny.fb_in22k_ft_in1k"
   ],
-  "alasan_keputusan": "kandidat terbaik (cnv2_t) hanya -0.1031 dari kontrol, tidak melewati margin 0.005, jadi kontrol dipertahankan",
+  "alasan_keputusan": "kandidat terbaik (cnv2_t + effv2_s) hanya +0.0036 dari kontrol, tidak melewati margin 0.005, jadi kontrol dipertahankan",
   "my_val": {
-    "macro_f1": 0.3057,
-    "akurasi": 0.3077,
-    "n_gambar": 104,
+    "macro_f1": 0.972,
+    "akurasi": 0.9734,
+    "n_gambar": 413,
     "f1_per_kelas": {
-      "botol_plastik": 0.3415,
-      "gelas_plastik": 0.2909,
-      "kertas_kardus": 0.32,
-      "saset_kemasan": 0.36,
-      "styrofoam": 0.2162
+      "botol_plastik": 0.975,
+      "gelas_plastik": 0.974,
+      "kertas_kardus": 0.9565,
+      "saset_kemasan": 0.98,
+      "styrofoam": 0.9746
     }
   },
   "kontrol": {
     "run": "cnx_tiny",
-    "macro_f1": 0.3057
+    "macro_f1": 0.972
   },
   "selisih_terhadap_kontrol": 0.0,
   "margin": 0.005,
   "ukuran_model_mib": 53.1,
-  "perkiraan_cpu_menit": 2.6,
+  "perkiraan_cpu_menit": 2.5,
   "cfg": {
     "img_size": 256,
-    "epochs": 1,
+    "epochs": 12,
     "warmup_epochs": 1,
     "batch_size": 32,
     "weight_decay": 0.05,
@@ -47,5 +47,5 @@
     "torch": "2.11.0+cu130",
     "timm": "1.0.30"
   },
-  "smoke": true
+  "smoke": false
 }
