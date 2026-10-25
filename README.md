@@ -27,7 +27,7 @@ Deep Learning (IF25-40401) · Teknik Informatika ITERA · Semester Ganjil 2026/2
 |---------|--------|----------------------------------|------------------------------|
 | Preview 1 (14 Okt) | `747c274` | | 0.8941 |
 | Preview 2 (21 Okt) | `0b03b3a` | | 0.8979 |
-| Final (25 Okt)     | [ISI hash commit setelah push] | 0.9720 | |
+| Final (25 Okt)     | '0634bc4b' | 0.9720 | |
 
 Perbandingan run hold-out pada `my_val` (epoch terakhir, EMA):
 
