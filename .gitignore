@@ -1,0 +1,7 @@
+*.zip
+*_eval.json
+__pycache__/
+cek_holdout/
+data_lokal/
+my_val/
+runs/
