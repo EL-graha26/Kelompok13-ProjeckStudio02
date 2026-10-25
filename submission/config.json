@@ -1,9 +1,0 @@
-{
-  "members": [
-    "convnext_tiny.fb_in22k_ft_in1k"
-  ],
-  "img_size": 256,
-  "tta_hflip": false,
-  "timm_version": "1.0.30",
-  "torch_version": "2.11.0+cu130"
-}
