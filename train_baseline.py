@@ -27,7 +27,7 @@ CLASSES = evaluate.CLASSES
 NUM_CLASSES = len(CLASSES)
 
 
-# ----------------------------------------------------------------------------- data
+# data
 def ensure_val_split(src, val_dir, frac, seed):
     """Buat my_val/ (salinan 15% gambar per kelas) HANYA jika belum ada.
     Kalau my_val/ sudah ada (mis. dari baseline starter kit) split lama dipakai ulang,
@@ -53,7 +53,7 @@ def val_keys(val_dir):
 
 
 def train_transform(size):
-    # Output tensor 0..1 (normalisasi dikerjakan di dalam Member)
+    # Output tensor 0..1 normalisasi dikerjakan di dalam Member
     return T.Compose([
         T.RandomResizedCrop(size, scale=(0.35, 1.0), ratio=(3 / 4, 4 / 3),
                             interpolation=InterpolationMode.BICUBIC),
@@ -68,7 +68,7 @@ def eval_transform(size):
     return T.Compose([T.Resize((size, size), interpolation=InterpolationMode.BICUBIC), T.ToTensor()])
 
 
-# ----------------------------------------------------------------------------- model utils
+# model utils
 class EMA:
     """Rata-rata bergerak eksponensial dari bobot: lebih stabil daripada bobot epoch terakhir."""
 
@@ -122,7 +122,7 @@ def seed_all(s):
     torch.cuda.manual_seed_all(s)
 
 
-# ----------------------------------------------------------------------------- main
+# main
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--data", required=True, help="folder train/ dari dataset (ImageFolder)")
@@ -158,7 +158,7 @@ def main():
     run.mkdir(parents=True, exist_ok=True)
     (run / "args.json").write_text(json.dumps(vars(a), indent=2))
 
-    # ---- data: train = semua gambar di --data KECUALI my_val (atau semua, bila --full)
+    # data: train = semua gambar didata KECUALI my_val 
     ensure_val_split(a.data, a.val_dir, 0.15, a.split_seed)
     ds_tr = datasets.ImageFolder(a.data, train_transform(a.img_size))
     ds_ev = datasets.ImageFolder(a.data, eval_transform(a.img_size))
@@ -175,7 +175,7 @@ def main():
     dl_tr = DataLoader(Subset(ds_tr, tr_idx), a.batch_size, shuffle=True, drop_last=True, **kw)
     dl_va = DataLoader(Subset(ds_ev, va_idx), 64, shuffle=False, **kw)
 
-    # ---- model, optimizer, scheduler
+    # model, optimizer, scheduler
     model = Member(a.backbone, pretrained=not a.no_pretrained,
                    drop_path=a.drop_path, drop_rate=a.drop_rate).to(device)
     ema = EMA(model, a.ema) if a.ema > 0 else None
@@ -190,7 +190,7 @@ def main():
     hard_ce = nn.CrossEntropyLoss(label_smoothing=a.smooth)
     scaler = torch.amp.GradScaler("cuda", enabled=amp)
 
-    # ---- training loop
+    #training loop
     log_f = open(run / "log.csv", "w", newline="")
     log = csv.writer(log_f)
     log.writerow(["epoch", "train_loss", "f1_raw", "f1_ema", "acc_ema", "mix", "sec"])
@@ -230,7 +230,7 @@ def main():
               f"{sec:.0f}s", flush=True)
     log_f.close()
 
-    # ---- simpan epoch TERAKHIR (bobot EMA kalau aktif), bukan "epoch terbaik"
+    #simpan epoch TERAKHIR (bobot EMA kalau aktif), 
     final = ema.module if ema else model
     torch.save({k: v.detach().cpu().clone() for k, v in final.state_dict().items()}, run / "member.pth")
     m, probs = last
@@ -243,7 +243,7 @@ def main():
                 confusion_matrix=m["confusion_matrix"])
     (run / "info.json").write_text(json.dumps(info, indent=2))
 
-    if not a.full:  # daftar gambar paling "yakin salah" -> bahan audit label noise
+    if not a.full:  
         rows = []
         for (path, lab), p in zip((ds_ev.samples[i] for i in va_idx), probs):
             pr = int(p.argmax())
